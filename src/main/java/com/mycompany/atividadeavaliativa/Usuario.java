@@ -10,6 +10,7 @@ package com.mycompany.atividadeavaliativa;
 import java.time.LocalDateTime;
 
 public class Usuario {
+    private int id;
     private String tipoPerfil;
     private StatusUsuario status;
     private String nomeDeUsuario;
@@ -18,6 +19,10 @@ public class Usuario {
     private LocalDateTime dataCadastro;
     private int notificacoesRecebidas;
     private int notificacoesLidas;
+
+    public Usuario() {
+    }
+    
 
     public Usuario(String tipoPerfil, StatusUsuario status, String nomeDeUsuario, String nome, String senha, LocalDateTime dataCadastro) {
         this.tipoPerfil = tipoPerfil;
@@ -28,6 +33,14 @@ public class Usuario {
         this.dataCadastro = dataCadastro;
         this.notificacoesRecebidas = 0;
         this.notificacoesLidas = 0;
+    }
+    
+    public int getId() {
+        return id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTipoPerfil() {
