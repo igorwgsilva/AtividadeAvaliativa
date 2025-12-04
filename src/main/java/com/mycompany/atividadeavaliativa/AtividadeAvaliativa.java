@@ -11,6 +11,7 @@ package com.mycompany.atividadeavaliativa;
 public class AtividadeAvaliativa {
 
     public static void main(String[] args) {
+        DbUtils.createNewTable();
         System.out.println("Hello World!");
     }
 }
