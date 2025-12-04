@@ -7,6 +7,7 @@
  *
  * @author igor2
  */
+package com.mycompany.atividadeavaliativa;
 
 import java.util.List;
 

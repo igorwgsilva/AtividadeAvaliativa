@@ -1,4 +1,5 @@
 com\mycompany\atividadeavaliativa\AtividadeAvaliativa.class
-IUsuarioRepository.class
-StatusUsuario.class
-Usuario.class
+com\mycompany\atividadeavaliativa\Usuario.class
+com\mycompany\atividadeavaliativa\IUsuarioRepository.class
+com\mycompany\atividadeavaliativa\StatusUsuario.class
+com\mycompany\atividadeavaliativa\UsuarioJdbcRepository.class
