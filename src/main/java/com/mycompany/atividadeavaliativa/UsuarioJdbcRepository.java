@@ -28,7 +28,7 @@ public class UsuarioJdbcRepository implements IUsuarioRepository {
             }
 
         } catch (SQLException e) {
-            System.err.println("Erro ao buscar usuário por nome: " + e.getMessage());
+            System.err.println("Erro ao buscar usuario por nome: " + e.getMessage());
             throw new RuntimeException("Falha na consulta ao banco de dados.", e);
         }
         return usuario;
@@ -66,8 +66,8 @@ public class UsuarioJdbcRepository implements IUsuarioRepository {
             }
             
         } catch (SQLException e) {
-            System.err.println("Erro ao salvar usuário: " + e.getMessage());
-            throw new RuntimeException("Falha na persistência do usuário.", e);
+            System.err.println("Erro ao salvar usuario: " + e.getMessage());
+            throw new RuntimeException("Falha na persistencia do usuario.", e);
         }
     }
 
@@ -83,7 +83,7 @@ public class UsuarioJdbcRepository implements IUsuarioRepository {
                 return rs.getInt(1) > 0;
             }
         } catch (SQLException e) {
-            System.err.println("Erro ao verificar existência de usuários: " + e.getMessage());
+            System.err.println("Erro ao verificar existencia de usuarios: " + e.getMessage());
             throw new RuntimeException("Falha na consulta ao banco de dados.", e);
         }
         return false;
@@ -103,7 +103,7 @@ public class UsuarioJdbcRepository implements IUsuarioRepository {
             }
 
         } catch (SQLException e) {
-            System.err.println("Erro ao buscar todos os usuários: " + e.getMessage());
+            System.err.println("Erro ao buscar todos os usuarios: " + e.getMessage());
             throw new RuntimeException("Falha na consulta ao banco de dados.", e);
         }
         return usuarios;
@@ -127,4 +127,41 @@ public class UsuarioJdbcRepository implements IUsuarioRepository {
         
         return usuario;
     }
+    
+    @Override
+public void atualizar(Usuario usuario) {
+    String sql = """
+                 UPDATE usuario SET 
+                 tipo_perfil = ?, 
+                 status_usuario = ?, 
+                 nome = ?, 
+                 senha = ?, 
+                 notificacoes_recebidas = ?, 
+                 notificacoes_lidas = ?
+                 WHERE id = ?
+                 """;
+
+    try (Connection conn = DbUtils.connect();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setString(1, usuario.getTipoPerfil());
+        stmt.setString(2, usuario.getStatus().name()); 
+        stmt.setString(3, usuario.getNome());
+        stmt.setString(4, usuario.getSenha());
+        stmt.setInt(5, usuario.getNotificacoesRecebidas());
+        stmt.setInt(6, usuario.getNotificacoesLidas());
+        
+        stmt.setInt(7, usuario.getId()); 
+        
+        int linhasAfetadas = stmt.executeUpdate();
+        
+        if (linhasAfetadas == 0) {
+            throw new RuntimeException("Erro ao atualizar: Usuário com ID " + usuario.getId() + " não encontrado.");
+        }
+        
+    } catch (SQLException e) {
+        System.err.println("Erro ao atualizar usuário: " + e.getMessage());
+        throw new RuntimeException("Falha na atualização da persistência.", e);
+    }
+}
 }

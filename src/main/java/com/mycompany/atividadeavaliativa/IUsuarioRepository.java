@@ -14,8 +14,8 @@ import java.util.List;
 public interface IUsuarioRepository {
     
     boolean existeUsuarioCadastrado(); 
-    
     void salvar(Usuario usuario); 
     Usuario buscarPorNomeDeUsuario(String nomeDeUsuario);
     List<Usuario> buscarTodos(); 
+    void atualizar(Usuario usuario);
 }

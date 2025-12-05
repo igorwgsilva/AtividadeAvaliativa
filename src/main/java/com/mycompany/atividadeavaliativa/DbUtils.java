@@ -14,15 +14,15 @@ import java.sql.SQLException;
 
 public class DbUtils {
     
-    // URL do banco de dados SQLite
+   
     private static final String URL = "jdbc:sqlite:atividade.db";
 
     public static Connection connect() {
         Connection conn = null;
         try {
-            // Tenta se conectar. Se o arquivo DB não existe, ele é criado.
+            
             conn = DriverManager.getConnection(URL);
-            System.out.println("Conexão com SQLite estabelecida com sucesso.");
+            System.out.println("Conexao com SQLite estabelecida com sucesso.");
             return conn;
             
         } catch (SQLException e) {
@@ -51,10 +51,10 @@ public static void createNewTable() {
          java.sql.Statement stmt = conn.createStatement()) {
         
         stmt.execute(sql);
-        System.out.println("Tabela 'usuario' criada ou já existente.");
+        System.out.println("Tabela 'usuario' criada ou ja existente.");
         
     } catch (SQLException e) {
-        System.err.println("Erro na criação da tabela: " + e.getMessage());
+        System.err.println("Erro na criacao da tabela: " + e.getMessage());
     }
 }
 }
